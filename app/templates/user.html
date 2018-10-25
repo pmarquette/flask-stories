@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr valing="top">
+      {% if user.username == 'pmarquette' %}
+      <td><img src="{{user.get_gravatar(pmarquette=True)}}"></td>
+      {% else %}
+      <td><img src="{{user.get_gravatar(pmarquette=False)}}"></td>
+      {% endif %}
+      <td>
+        <h1>User: {{ user.username }}</h1>
+        {% if user.profile_description %}<p>{{user.profile_description}}</p>{% endif %}
+        {% if user.last_logon %}<p>{{user.last_logon}}</p>{% endif %}
+        {% if user == current_user %} <!-- Only see edit on your own profile -->
+          <p><a class="waves-effect waves-light btn" href="{{url_for('edit_profile')}}">Edit profile</a></p>
+        {% elif not FollowHelpers.is_following(current_user, user) %}
+        <p><a class="waves-effect waves-light btn" href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
+        {% else %}
+        <p><a class="waves-effect waves-light btn" href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
+        {% endif %}
+      </td>
+      
+    </tr>
+  </table>    
+
+    <hr>
+
+{% endblock %}

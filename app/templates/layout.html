@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charaset="utf-8">
+    {% if title %}
+      <title>{{ title }} - Flask Blog</title>
+      {% else %}
+      <title>Flask Blog</title>
+    {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <style>  
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+    
+      main {
+        flex: 1 0 auto;
+      }
+
+    </style>
+  </head>
+  <body>
+    {% include 'includes/_navbar.html' %}
+    
+    <main>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
+    </main>
+    {% include 'includes/_footer.html' %}
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.js"
+      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+      crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>

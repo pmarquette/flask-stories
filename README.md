@@ -1,0 +1,1 @@
+Pierce Marquette 2018. Portfolio project. Social media site in Python/Flask.

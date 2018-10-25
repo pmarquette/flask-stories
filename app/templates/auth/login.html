@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2>Login</h2>
+<form action="" method="post" novalidate>
+  {{form.hidden_tag()}} <!-- Generates token to protec agains CSRF alongside Flask SECRET_KEY value-->
+  <p>
+    {{form.username.label}}
+    </br>
+    {{form.username(size=32)}}
+    </br>
+    {% for error in form.username.errors %}
+    <span style="color: red;">[{{error}}]</span>
+    {% endfor %}
+  </p>
+  <p>
+    {{form.password.label}}
+    </br>
+    {{form.password(size=32)}}
+    </br>
+    {% for error in form.password.errors %}
+    <span style="color: red;">[{{error}}]</span>
+    {% endfor %}
+  </p>
+  <p>
+    {{form.remember_me()}} {{form.remember_me.label}}
+  </p>
+  <p>
+    {{form.submit()}}
+  </p>
+</form>
+
+<p>
+  Forgot your password? <a href="{{url_for('auth.reset_password')}}">Click to reset.</a>
+</p>
+
+<p><a class="waves-effect waves-light btn" href="{{url_for('auth.register')}}">Click here to register</a></p>
+
+{% endblock %}

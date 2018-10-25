@@ -1,0 +1,8 @@
+ <div class="card">
+  {% if post.user_fkey.username == 'pmarquette' %}
+  <img style="height:80px; width:80px; border-radius: 40px;" class="rounded-circle" src="{{post.user_fkey.get_gravatar(pmarquette=True)}}">
+  {% else %}
+  <img style="height:80px; width:80px; border-radius: 40px;" src="{{post.user_fkey.get_gravatar(pmarquette=False)}}">
+  {% endif %}
+  <a href="{{ url_for('user', username=post.user_fkey.username) }}">{{ post.user_fkey.username }}</a> says:<br>{{ post.body }}
+</div>

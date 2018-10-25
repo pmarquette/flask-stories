@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Hello, {{ current_user.username }}!</h1>
+<form action="" method="post">
+    {{form.hidden_tag()}} <!-- Generates token to protec agains CSRF alongside Flask SECRET_KEY value-->
+    <p>
+      {{form.post.label}}
+      </br>
+      {{form.post(cols=32, rows=4)}}
+      </br>
+      {% for error in form.post.errors %}
+      <span style="color:red;">[{{error}}]</span>
+      {% endfor %}
+    </p>
+    <p>{{form.submit()}}</p>
+</form>
+<h4>Latest Posts</h4>
+{% for post in posts %}
+{% include 'includes/_post.html' %}
+{% endfor %}
+
+{% endblock %}

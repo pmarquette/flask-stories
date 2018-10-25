@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2>Latest Public Stories</h2>
+
+{% for post in posts %}
+{% include 'includes/_post.html' %}
+{% endfor %}
+
+{% endblock %}
