@@ -106,3 +106,14 @@ def global_feed():
 @app.route('/about')
 def about():
   return render_template('about.html')
+
+@app.route('/post', methods=['GET', 'POST'])
+@login_required
+def post():
+  form = PostForm()
+  cur_user = User.objects(username=current_user.username).first()
+  if form.validate_on_submit():
+    Post(body = form.post.data, user_fkey = cur_user, timestamp = datetime.datetime.now()).save()
+    flash('Post successful')
+    return redirect(url_for('index'))
+  return render_template('post.html', title='Post', form=form)
